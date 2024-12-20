@@ -38,6 +38,14 @@ export default function App() {
     // with the data belonging to the member with id 2.
     // On the other hand, if the `editing` state changes back to null
     // then we need to reset the form back to empty values
+
+    if (editing == null){
+      setFormValues(initialValues)
+    } else {
+      const {lname, fname, bio} = members.find(mem => mem.id == editing)
+        setFormValues({lname, fname, bio} )
+      
+    }
     
   }, [editing])
 
@@ -80,7 +88,14 @@ export default function App() {
     // ✨ This takes the values of the form and replaces the data of the
     // member in the `members` state whose id matches the `editing` state
 
-    
+   setMembers(prevMem => prevMem.map(mem =>{
+    if(mem.id == editing){
+      return { ...mem, ...formValues}
+    }
+    return mem;
+   }
+   ))
+   setEditing(null)
   }
   const onSubmit = evt => {
     // ✨ This is the submit handler for your form element.
