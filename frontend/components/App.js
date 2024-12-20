@@ -2,6 +2,7 @@
 // The ✨ tasks found inside this component are not in order.
 // Check the README for the appropriate sequence to follow.
 import React, { useState, useEffect } from 'react'
+import { useLinkClickHandler } from 'react-router-dom'
 
 let id = 0
 const getId = () => ++id
@@ -37,7 +38,7 @@ export default function App() {
     // with the data belonging to the member with id 2.
     // On the other hand, if the `editing` state changes back to null
     // then we need to reset the form back to empty values
-    editing
+    
   }, [editing])
 
   const onChange = evt => {
@@ -47,28 +48,39 @@ export default function App() {
     console.log('The onChange Function',evt.target.id)
     const id = evt.target.id;
     const value = evt.target.value;
-    setFormValues({ ...formValues, [id]: value })
+    // setFormValues({ ...formValues, [id]: value })
+    setFormValues(prevValues => ({ ...prevValues, [id]: value }))
   }
  
   const edit = id => {
     // ✨ Put this function inside a click handler for the <button>Edit</button>.
     // It should change the value of `editing` state to be the id of the member
     // whose Edit button was clicked
+   
+    
+   setEditing(id)
+    
   }
   const submitNewMember = () => {
     // This takes the values of the form and constructs a new member object,
     // which is then concatenated at the end of the `members` state
   
-    setMembers(members.concat({lname: formValues.lname, fname: formValues.fname, bio: formValues.bio}))
-   
+     setMembers(
+      members.concat({
+        lname: formValues.lname,
+         fname: formValues.fname,
+          bio: formValues.bio,
+           id: getId()}))
+
     setFormValues(initialValues())  
   }
+
   
   const editExistingMember = () => {
     // ✨ This takes the values of the form and replaces the data of the
     // member in the `members` state whose id matches the `editing` state
-    const value = value.replaceAll()
-    setFormValues()
+
+    
   }
   const onSubmit = evt => {
     // ✨ This is the submit handler for your form element.
@@ -77,8 +89,12 @@ export default function App() {
     // Don't allow the page to reload! Prevent the default behavior
     // and clean up the form after submitting
     evt.preventDefault()
-    submitNewMember()
-
+   if(editing){
+    editExistingMember()
+   } else {
+  submitNewMember()
+   }
+setFormValues(initialValues())
   }
   return (
     <div>{/* ✨ Fix the JSX by wiring the necessary values and event handlers */}
@@ -92,7 +108,7 @@ export default function App() {
                   <h4>{mem.fname} {mem.lname}</h4>
                   <p>{mem.bio}</p>
                 </div>
-                <button>Edit</button>
+                <button onClick={() => edit (mem.id)}>Edit</button>
               </div>
             ))
           }
