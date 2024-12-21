@@ -10,7 +10,7 @@
     "start": "npm run backend",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "[my-framework] build --output public"
+    "build-backend": "[my-framework] build --output public"
   },
 
   "homepage": "https://github.com/Mirwes-Hakimi/team-builder.git",
