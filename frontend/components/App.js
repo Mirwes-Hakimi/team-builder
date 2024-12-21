@@ -37,7 +37,7 @@ export default function App() {
     // this means we need to populate the inputs of the form
     // with the data belonging to the member with id 2.
     // On the other hand, if the `editing` state changes back to null
-    // then we need to reset the form back to empty values
+    // then we need to reset the form back to empty values s
 
     if (editing == null){
       setFormValues(initialValues)
@@ -99,7 +99,7 @@ export default function App() {
   }
 
 
-  
+
   const onSubmit = evt => {
     // ✨ This is the submit handler for your form element.
     // It will call either `submitNewMember` or `editExistingMember`

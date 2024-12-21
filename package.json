@@ -11,6 +11,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+  
   "homepage": "https://github.com/Mirwes-Hakimi/team-builder.git",
   "devDependencies": {
     "@babel/core": "^7.23.0",
